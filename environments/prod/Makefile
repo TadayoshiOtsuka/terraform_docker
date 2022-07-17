@@ -5,6 +5,9 @@ SHELL=/bin/bash
 fmt:
 	terraform fmt -check -recursive
 
+init: fmt
+	terraform init
+
 plan-prod: fmt
 	terraform plan -var-file prod.tfvars
 
