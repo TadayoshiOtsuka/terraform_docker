@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  terraform-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /terraform/environments/prod
+    tty: true
+    env_file:
+      - environments/prod/.env
+    volumes:
+      - type: bind
+        source: "environments/prod"
+        target: "/terraform/environments/prod"
+      - type: bind
+        source: "modules"
+        target: "/terraform/modules"
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+
+  terraform-stg:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /terraform/environments/stg
+    tty: true
+    entrypoint: ash
+    env_file:
+      - environments/stg/.env
+    volumes:
+      - type: bind
+        source: "environments/stg"
+        target: "/terraform/environments/stg"
+      - type: bind
+        source: "modules"
+        target: "/terraform/modules"
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
