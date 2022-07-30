@@ -26,7 +26,6 @@ services:
       dockerfile: Dockerfile
     working_dir: /terraform/environments/stg
     tty: true
-    entrypoint: ash
     env_file:
       - environments/stg/.env
     volumes:
