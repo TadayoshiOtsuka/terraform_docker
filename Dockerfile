@@ -26,9 +26,9 @@ RUN curl --fail --silent -L -o /tmp/tflint.zip https://github.com/terraform-lint
 
 # tflint rule
 ENV TFLINT_RULE_SET_AWS_VER=0.15.0
-RUN mkdir -p  ~/.tflint.d/plugins/github.com/terraform-linters/tflint-ruleset-aws/${TFLINT_RULE_SET_AWS_VER}/ \
-    && wget -O /tmp/tflint-ruleset-aws.zip https://github.com/terraform-linters/tflint-ruleset-aws/releases/download/v${TFLINT_RULE_SET_AWS_VER}/tflint-ruleset-aws_linux_amd64.zip \
-    && unzip /tmp/tflint-ruleset-aws.zip -d ~/.tflint.d/plugins/github.com/terraform-linters/tflint-ruleset-aws/${TFLINT_RULE_SET_AWS_VER}/ \
-    && rm /tmp/tflint-ruleset-aws.zip
+RUN mkdir -p  ~/.tflint.d/plugins/github.com/terraform-linters/tflint-ruleset-aws/${TFLINT_RULE_SET_AWS_VER}/ && \
+    curl --fail --silent -L -o /tmp/tflint-ruleset-aws.zip https://github.com/terraform-linters/tflint-ruleset-aws/releases/download/v${TFLINT_RULE_SET_AWS_VER}/tflint-ruleset-aws_linux_amd64.zip && \
+    unzip /tmp/tflint-ruleset-aws.zip -d ~/.tflint.d/plugins/github.com/terraform-linters/tflint-ruleset-aws/${TFLINT_RULE_SET_AWS_VER}/ && \
+    rm /tmp/tflint-ruleset-aws.zip
 
 ENTRYPOINT [ "ash" ]
