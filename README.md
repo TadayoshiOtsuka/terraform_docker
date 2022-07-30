@@ -1,5 +1,11 @@
 # terraform_docker
 
+・Terraform  
+・aws-cli-v2  
+・Docker(DooD)  
+・tfsec  
+・tflint
+
 Set-up  
 Set the correct values by referring to `.env.example` in `environments/prod` & `environments/stg`
 
