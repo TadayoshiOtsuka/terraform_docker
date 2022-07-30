@@ -2,20 +2,25 @@ SHELL=ash
 
 .PHONY: $(shell egrep -oh ^[a-zA-Z0-9][a-zA-Z0-9_-]+: $(MAKEFILE_LIST) | sed 's/://')
 
-check:
+sec:
 	tfsec
+
+lint:
+	tflint
 
 fmt:
 	terraform fmt -check -recursive
 
+check: fmt lint sec
+
 init: fmt
 	terraform init
 
-plan-stg: fmt
+plan-stg: check
 	terraform plan -var-file stg.tfvars
 
-plan-stg-verbose: fmt
+plan-stg-verbose: check
 	TF_LOG=debug terraform plan -var-file stg.tfvars
 
-apply-stg: fmt
+apply-stg: check
 	terraform apply -var-file stg.tfvars
