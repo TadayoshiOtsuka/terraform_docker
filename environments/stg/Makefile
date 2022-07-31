@@ -5,13 +5,16 @@ SHELL=ash
 sec:
 	tfsec
 
+sec-min:
+	tfsec --minimum-severity HIGH
+
 lint:
 	tflint
 
 fmt:
 	terraform fmt -check -recursive
 
-check: fmt lint sec
+check: fmt lint sec-min
 
 init: fmt
 	terraform init
