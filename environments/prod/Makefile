@@ -2,6 +2,10 @@ SHELL=/bin/bash
 
 .PHONY: $(shell egrep -oh ^[a-zA-Z0-9][a-zA-Z0-9_-]+: $(MAKEFILE_LIST) | sed 's/://')
 
+# ===================
+# static checks
+# ===================
+
 sec:
 	tfsec
 
@@ -15,6 +19,10 @@ fmt:
 	terraform fmt -check -recursive
 
 check: fmt lint sec-min
+
+# ===================
+# terraform commands
+# ===================
 
 init: fmt
 	terraform init
