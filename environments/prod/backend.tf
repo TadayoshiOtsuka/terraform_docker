@@ -10,3 +10,5 @@ terraform {
 provider "aws" {
   region = var.region
 }
+
+# Manage tfstate remotely and consider a Lock mechanism as well
